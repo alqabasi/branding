@@ -11,3 +11,5 @@ alqabasi.co
 app.alqabasi.*
 api.alqabasi.*
 db.alqabasi.*
+
+other...
