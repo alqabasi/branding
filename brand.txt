@@ -1,0 +1,13 @@
+[BRAND]
+ALQabasi for Trading
+
+[DOMAINS]
+alqabasi.com
+alqabasi.trade
+alqabasi.trading
+alqabasi.co
+
+[SUBDOMAINS]
+app.alqabasi.*
+api.alqabasi.*
+db.alqabasi.*
