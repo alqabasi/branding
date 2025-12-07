@@ -1,0 +1,36 @@
+name: Auto PR + AutoMerge via Action
+
+on:
+  create:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-pr:
+    if: github.ref_type == 'branch' && github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        id: pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: main
+          branch: "${GITHUB_REF##*/}"
+          title: "Auto PR for ${GITHUB_REF##*/}"
+          body: "Automatic PR triggered by branch creation."
+          draft: false
+
+      - name: Enable AutoMerge
+        if: steps.pr.outputs.pull-request-number != ''
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ steps.pr.outputs.pull-request-number }}
+          merge-method: merge
